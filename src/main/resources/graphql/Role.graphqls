@@ -1,0 +1,23 @@
+# A Role is a named collection of edges
+type Role {
+    id: Long!
+    name: String!
+    users: [User]
+    permissions: [Permission]
+}
+
+input RoleInput {
+    id: Long!
+    name: String!
+    users: [UserInput]
+    permissions: [PermissionInput]
+}
+
+extend type Query {
+   findAllRoles: [Role]!
+}
+
+extend type Mutation {
+     createRole(name: String!): Role!
+     deleteRole(id: Long!): Boolean
+}

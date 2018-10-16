@@ -1,0 +1,23 @@
+# An arbitrary named collection of Users. Has no bearing on access control.
+type Group {
+    id: Long!
+    name: String!
+    description: String
+    users: [User]
+}
+
+input GroupInput {
+    id: Long!
+    name: String!
+    description: String
+    users: [UserInput]
+}
+
+extend type Query {
+   findAllGroups: [Group]!
+}
+
+extend type Mutation {
+     createGroup(name: String!, description: String): Group!
+     deleteGroup(id: Long!) : Boolean
+}

@@ -1,0 +1,58 @@
+# Decribes an end-user.
+type User {
+    id: Long!
+
+    #The userInput's unique username
+    username: String!
+
+    # The userInput's direct assigned edges
+    permissions: [Permission]
+
+    # The groupInputs the userInput belongs to
+    groups: [Group]
+
+    # The roleInputs assigned to the userInput
+    roles: [Role]
+
+    # The Spring Authorities which make up a Set of the userInput's Role edges and direct edges
+    authorities: [GrantedAuthority]
+}
+
+input UserInput {
+    id: Long!
+
+    #The userInput's unique username
+    username: String!
+
+    # The userInput's direct assigned edges
+    permissions: [PermissionInput]
+
+    # The groupInputs the userInput belongs to
+    groups: [GroupInput]
+
+    # The roleInputs assigned to the userInput
+    roles: [RoleInput]
+}
+
+#Change a userInput password
+input PasswordChangeInput {
+    username: String!
+    currentPassword: String!
+    newPassword: String!
+}
+
+type GrantedAuthority {
+    authority: String!
+}
+
+type Query {
+    findAllUsers: [User]!
+    authenticateUsers(username: String!, password: String!): User!
+}
+
+type Mutation {
+     createUser(username: String!, password: String!): User!
+     updateUser(userInput: UserInput!): User!
+     deleteUser(id: Long!): Boolean
+     changeUserPassword(request: PasswordChangeInput!): Boolean
+}

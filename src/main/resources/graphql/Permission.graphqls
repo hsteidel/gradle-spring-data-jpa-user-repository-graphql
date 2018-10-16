@@ -1,0 +1,21 @@
+# Permissions are the basic access control unit. They can be grouped into Roles.
+type Permission {
+    id: Long!
+    name: String!
+    description: String
+}
+
+input PermissionInput {
+    id: Long!
+    name: String!
+    description: String
+}
+
+extend type Query {
+   findAllPermissions: [Permission]!
+}
+
+extend type Mutation {
+     createPermission(name: String!, description: String): Permission!
+     deletePermission(id: Long!): Boolean
+}
